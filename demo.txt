@@ -1,0 +1,3 @@
+we created this roboshopwithansible folder in c/users/tanoo/roboshopwithansible location and creating this txt file.
+in github we created a remote repo with sutitable name. now making this local folder as git folder and pushing this demo 
+file to remote repo.

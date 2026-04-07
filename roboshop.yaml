@@ -8,7 +8,8 @@
     instances:
     - mongodb
     - catalogue
-    domain_name: devops88s.fun 
+    domain_name: devops88s.fun
+    action: create
 
 
 
@@ -25,10 +26,14 @@
          Environment: "{{env}}"
          Name: "{{item}}-{{env}}"  
      loop: "{{instances}}"
+     when: action =="create"
      register: ec2_output
+
    - name: prinitng the ec2_output
      ansible.builtin.debug : 
        msg: "{{ec2_output}}"
+     when: action == "create"
+
    - name: creating the route53 records
      amazon.aws.route53:
       state: present
@@ -40,6 +45,7 @@
       wait: true
       overwrite: true
      loop: "{{ec2_output.results}}"
+     when: action == "create"
 
    - name: creating the route53 record for frontedn
      amazon.aws.route53:
@@ -52,7 +58,25 @@
       wait: true
       overwrite: true
      loop: "{{ec2_output.results}}"
-     when: item.item == "frontend"
+     when: item.item == "frontend" and action == ""create"
+
+   - name: deleting route53 records
+     amazon.aws.ec2_instance:
+       state: absent
+       zone: "{{domain_name}}"
+       record: "{{item.item}}-{{env}}.{{domain_name}}"             #mongodb-dev.devops88s.fun, catalog-dev.devops88s.fun
+       type: A
+       ttl: 1
+     loop: "{{instances}}"
+     when: action == "destroy"
+
+   - name: deleting ec2 instances 
+     amazon.aws.ec2_instance:
+      state: absent
+      name: "{{item}}-{{env}}" 
+     loop: "{{instances}}"
+     when: action == "destroy" 
+          
 
 
 

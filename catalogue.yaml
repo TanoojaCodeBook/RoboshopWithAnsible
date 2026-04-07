@@ -30,7 +30,7 @@
       dest: /tmp/catalogue.zip
 
    - name: unzip the application code
-     ansiblie.builtin.unarchive:
+     ansible.builtin.unarchive:
        src: /tmp/catalogue.zip
        dest: /app
        remote_src: yes

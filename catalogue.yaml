@@ -11,7 +11,7 @@
        state: present
     
    - name: creating system user roboshop
-     ansibile.builtin.user:
+     ansible.builtin.user:
       name: roboshop
       state: present
       system: true

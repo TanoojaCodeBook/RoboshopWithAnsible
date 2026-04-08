@@ -65,5 +65,5 @@
 
    - name: load the products if not loaded before
      ansible.builtin.shell: mongosh --host "{{MONGODB_HOST}}" </app/db/master-data.js
-     When: catalogue_output.stdout | int < 0 #
+     when: catalogue_output.stdout | int < 0 #
         

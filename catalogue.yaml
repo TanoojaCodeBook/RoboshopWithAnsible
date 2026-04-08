@@ -43,6 +43,7 @@
      ansible.builtin.copy:
       src: catalog.service
       dest: /etc/systemd/system/catalogue.service
+      remote_src: yes
 
    - name: copying mongodb repo
      ansible.builtin.copy:

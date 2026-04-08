@@ -42,12 +42,12 @@
       type: A
       ttl: 1
       value: "{{item.instances[0].private_ip_address}}"
-      wait: true
+      wait: false
       overwrite: true
      loop: "{{ec2_output.results}}"
      when: 
       - state == "create"
-      - item.item != "fronted"
+      - item.item != "frontend"
 
    - name: creating the route53 record for frontedn
      amazon.aws.route53:
@@ -57,7 +57,7 @@
       type: A
       ttl: 1
       value: "{{item.instances[0].public_ip_address}}"
-      wait: true
+      wait: false
       overwrite: true
      loop: "{{ec2_output.results}}"
      when: 

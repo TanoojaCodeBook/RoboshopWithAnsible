@@ -55,7 +55,7 @@
        state: present
 
    - name: check schema is loaded or not . #if already loaded no need to load again other will load the schema. if we don't check this  when script multiple times it will load the schema multiples times. it causes memory issue.
-     ansible.builtin.commnd: mongosh --host "{{MONGODB_HOST}}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+     ansible.builtin.command: mongosh --host "{{MONGODB_HOST}}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
      register: catalogue_output
 
    - name: print the catalogue_schema_output

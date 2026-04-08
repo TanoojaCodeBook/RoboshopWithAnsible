@@ -41,7 +41,7 @@
 
    - name: copying catalog.service
      ansible.builtin.copy:
-      src: catalog.service
+      src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
       remote_src: yes
 

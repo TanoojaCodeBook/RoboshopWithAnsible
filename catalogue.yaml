@@ -61,5 +61,9 @@
 
    - name: print the catalogue_schema_output
      ansible.builtin.debug:
-       msg: "{{catalogue_output}}"
+       msg: "{{catalogue_output}}"    # if stdout is less than zero means data not loaded before. 
+
+   - name: load the products if not loaded before
+     ansible.builtin.shell: mongosh --host "{{MONGODB_HOST}}" </app/db/master-data.js
+     When: catalogue_output.stdout | int < 0 #
         

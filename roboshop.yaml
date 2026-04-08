@@ -66,11 +66,11 @@
      amazon.aws.ec2_instance:
        state: absent
        zone: "{{domain_name}}"
-       record: "{{item}}-{{env}}.{{domain_name}}"             #mongodb-dev.devops88s.fun, catalog-dev.devops88s.fun
+       record: "{{item.item}}-{{env}}.{{domain_name}}"             #mongodb-dev.devops88s.fun, catalog-dev.devops88s.fun
        type: A
        ttl: 1
      loop: "{{instances}}"
-     when: state == "destroy"
+     when: state == "destroyy"
 
    - name: deleting ec2 instances 
      amazon.aws.ec2_instance:

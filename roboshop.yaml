@@ -46,8 +46,8 @@
       overwrite: true
      loop: "{{ec2_output.results}}"
      when: 
-      -state == "create"
-      -item.item != "fronted"
+      - state == "create"
+      - item.item != "fronted"
 
    - name: creating the route53 record for frontedn
      amazon.aws.route53:

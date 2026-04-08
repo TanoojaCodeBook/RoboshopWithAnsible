@@ -63,14 +63,14 @@
       - state == "create"
 
    - name: deleting route53 records
-     amazon.aws.ec2_instance:
+     amazon.aws.route53:
        state: absent
        zone: "{{domain_name}}"
-       record: "{{item.item}}-{{env}}.{{domain_name}}"             #mongodb-dev.devops88s.fun, catalog-dev.devops88s.fun
+       record: "{{item}}-{{env}}.{{domain_name}}"             #mongodb-dev.devops88s.fun, catalog-dev.devops88s.fun
        type: A
        ttl: 1
      loop: "{{instances}}"
-     when: state == "destroyy"
+     when: state == "destroy"
 
    - name: deleting ec2 instances 
      amazon.aws.ec2_instance:

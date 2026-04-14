@@ -31,7 +31,7 @@
 
    - name: delete application code zip file  if anything exists
      ansible.builtin.file:
-       path: /tmp/catalogue.zip
+       path: /tmp/user.zip
        state: absent
      
    - name: donloading application code 

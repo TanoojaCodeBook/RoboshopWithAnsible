@@ -50,12 +50,17 @@
        path: /app
 
    - name: copying cart.service
-     ansible.builtin.copy:
+     ansible.builtin.template:
       src: cart.service.j2
       dest: /etc/systemd/system/cart.service
       
-   - name: start cart
+   - name: reload cart
      ansible.builtin.service:
        name: cart
-       state: started
-       enabled: yes
+       state: reloaded
+
+   - name: restart the cart
+     ansible.builtin.service:
+       name: cart
+       state: restarted
+       

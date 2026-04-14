@@ -49,9 +49,9 @@
      community.general.npm:
        path: /app
 
-   - name: copying catalog.service
+   - name: copying user.service
      ansible.builtin.copy:
-      src: user.service
+      src: user.service.j2
       dest: /etc/systemd/system/user.service
       
    - name: start and enable user

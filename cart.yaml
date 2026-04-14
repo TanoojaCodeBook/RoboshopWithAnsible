@@ -54,11 +54,6 @@
       src: cart.service.j2
       dest: /etc/systemd/system/cart.service
       
-   - name: reload cart
-     ansible.builtin.service:
-       name: cart
-       state: reloaded
-
    - name: restart the cart
      ansible.builtin.service:
        name: cart

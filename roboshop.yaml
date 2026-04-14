@@ -11,6 +11,7 @@
     domain_name: devops88s.fun
     state: create
 
+#ansible-playbook -i inventory.ini -e '{"instances": ["mongodb","catalogue","frontend","redis","user","cart","mysql","shipping","shipping","rabbitmq","payment"] }' roboshop.yaml
 
 
   tasks:

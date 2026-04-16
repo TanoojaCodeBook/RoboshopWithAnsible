@@ -56,10 +56,10 @@
      args:
        chdir: /app
 
-   - name: copying the shiiping catalog.service 
+   - name: copying the shiiping service 
      ansible.builtin.template :
        src: shipping.service.j2
-       dst: /etc/systemd/system/shipping.service
+       dest: /etc/systemd/system/shipping.service
 
    - name: deamon -reload
      ansible.builtin.systemd_service:

@@ -47,7 +47,7 @@
 
    - name: install npm dependencies
      community.general.npm:
-       path: /app
+       path: /app                            #npm will run at /app
 
    - name: copying catalog.service
      ansible.builtin.template:

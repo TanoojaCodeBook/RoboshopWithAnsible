@@ -1,0 +1,81 @@
+MONGODB
+If you are in mongodb server and if you want to connect mongodb client then(client will come automatically when you install mongodb server)
+mongosh
+show dbs
+use catalogue
+show collections
+
+If you are in another server(catalogue server- mongodb client needs to be downloaded) and if you want to connect mongodb client then
+mongosh --host {{ MONGODB_HOST }}
+
+
+Full package (server + client)
+sudo dnf install mongodb-org -y
+👉 Installs:
+mongod (server)
+mongosh (client)
+✅ Client-only package (what your sir used)
+sudo dnf install mongodb-mongosh -y  (dnf install mongodb-org -y if you use this it will donwload server and client don't start server and use client like reids two ways are there to download the client)
+👉 Installs only:
+mongosh (MongoDB shell/client)
+✔ No server installed
+✔ Lightweight
+✔ Best for app servers
+
+
+REDIS
+
+Redis sotres data in key-value. Redis stores data in RAM (memory), not primarily on disk.
+MongoDB	                                       Redis
+show dbs	                                   INFO keyspace
+use db	                                       SELECT db
+show collections (like tables)	               KEYS *
+find()	                                       GET / HGET / LRANGE
+
+If you are in a redis server and if you wan to connect to redis
+redis-cli
+You’ll get prompt like:
+127.0.0.1:6379>
+✔ That means you are connected to Redis
+🔐 If password is enabled
+redis-cli -a <password>
+Example:
+redis-cli -a RoboShop@1
+If you are in another server and if you want to connect to redis(client tool needed) db then
+redis-cli -h <host> -p <port>
+Example:
+redis-cli -h 172.31.10.20 -p 6379
+After connecting:
+PING
+👉 Output:
+PONG
+sudo dnf install redis -y when we run this only that server become redis server right. to install client also the same command have to use?
+❗ First, clear the misunderstanding
+sudo dnf install redis -y
+
+👉 This installs the Redis package, which includes:
+
+Redis server (redis-server)
+Redis client (redis-cli)
+🧠 Important point
+
+👉 Installing Redis package ≠ making it a Redis server
+
+A server becomes a Redis server only when you start the service
+🔍 What actually makes it a Redis server?
+sudo systemctl start redis
+sudo systemctl enable redis
+
+👉 Now it is acting as a Redis server
+✅ If you ONLY want client (best practice)
+On another server (client machine):
+
+You can still run:
+
+sudo dnf install redis -y
+
+👉 Then:
+
+Don’t start the service ❌
+Just use:
+redis-cli

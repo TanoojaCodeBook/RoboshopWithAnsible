@@ -25,7 +25,7 @@
       ansible.builtin.service:  
         name: mongod
         state: restarted
-    - name: updating protected mode from yes to no
+    
 
         
 

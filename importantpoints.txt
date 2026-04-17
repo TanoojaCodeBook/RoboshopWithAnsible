@@ -1,0 +1,102 @@
+ catalogue module is created with nodejs and mongodb
+
+extracted the catalogue.zip folder
+package.json --> Defines project info
+Lists required libraries (dependencies)
+Defines how to start the app
+
+server.js -->(Main application code)
+Starts a web server
+Connects to MongoDB
+Exposes APIs (endpoints)
+
+db-->master-data.js -->
+master-data.js creates the catalogue database and inserts data
+
+MySQL	             MongoDB
+Database	         Database
+Table	             Collection
+Row	                 Document (JSON)
+
+In catalogue.yaml sir loaded the schema right.
+why sir ran this in catalogue.yaml server only. we can load data in mongodb server right by creating mangodb.yaml file?
+Answer: .
+
+👉 Yes, technically you can load data from the MongoDB server
+But in real-world DevOps, we usually do what your sir did—and there’s a reason.
+🧠 Two possible approaches
+✅ Approach 1: Load from MongoDB server
+
+(Create mongodb.yaml)
+
+- name: Load data
+  hosts: mongodb
+  tasks:
+    - shell: mongosh </app/master-data.js
+
+👉 This works ✔️
+
+✅ Approach 2: Load from Catalogue server (your sir’s way)
+- name: Load data
+  hosts: catalogue
+  tasks:
+    - shell: mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
+
+👉 This is what your sir used ✔️
+
+🔥 Why your sir chose catalogue server
+✅ 1. Data belongs to the application(catalogue microservice/module)
+master-data.js is part of catalogue service code
+
+So:
+
+App owns its data
+
+👉 Best practice:
+
+Keep DB scripts with the service that uses them
+
+✅ 2. Loose coupling (very important)
+
+If you load from MongoDB server:
+
+MongoDB needs app files ❌ (malli mongodb server lo kuda master-data files download cheyyali)
+
+✅ 3. Microservices design principle
+
+In microservices:
+
+Each service manages:
+its schema
+its data
+
+👉 So:
+
+catalogue service → loads catalogue DB
+
+✅ 4. No need to copy files to DB server
+
+If using MongoDB server:
+
+You must copy master-data.js there ❌
+
+Current approach:
+
+File already exists in /app/db ✅
+
+When deploying catalogue:
+
+Deploy app → Load DB → Start service (for these we written script in ansible in catalogue.yaml)
+
+👉 Everything happens in one place
+
+Even though you run the script from the catalogue server, the data is stored in the MongoDB server
+When you run:
+
+mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
+
+👉 This means:
+
+Run command on catalogue server
+Connect to MongoDB server  (mongosh --host {{ MONGODB_HOST }})
+Execute script on that remote DB

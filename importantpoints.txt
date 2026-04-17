@@ -18,7 +18,7 @@ Database	         Database
 Table	             Collection
 Row	                 Document (JSON)
 
-In catalogue.yaml sir loaded the schema right.
+In catalogue.yaml sir preloaded the schema right ->because this preloaded data is required to run the app.
 why sir ran this in catalogue.yaml server only. we can load data in mongodb server right by creating mangodb.yaml file?
 Answer: .
 
@@ -100,3 +100,55 @@ mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
 Run command on catalogue server
 Connect to MongoDB server  (mongosh --host {{ MONGODB_HOST }})
 Execute script on that remote DB
+
+
+
+
+# user (mongodb + redis) and car is connected to redis. but in none of these sir didn't write any code to
+# # load the schema/db something because Redis doesn’t require any schema or initial data setup.
+# #Redis data is created dynamically by the application, not preloaded
+#  👉 Redis does NOT use schema at all
+# So:
+# No tables ❌
+# No collections ❌
+# No schema files ❌   
+# 🔥 Why no schema in Redis?
+# Because Redis is:
+# Key → Value
+# Example:
+# SET cart:1001 "item1,item2"
+# 👉 That’s it—no structure defined beforehand
+# 🛒 What happens in cart service
+# When app runs:
+# User adds item
+#         ↓
+# Cart service writes to Redis
+#         ↓
+# Key is created automatically
+
+# 👉 No need to pre-create anything
+
+# 👤 What happens in user service
+# User logs in
+#         ↓
+# Session stored in Redis
+
+# 👉 Again:
+
+# Key created dynamically (automatic ga values redis lo store aipothai. prestructer avasaram ledu)
+# No schema needed
+
+# User mongodb ki connect avuthundi mari data preload cheyyala vaddha?
+# 🧠 Why catalogue why they loaded the data?
+# Because:
+# Product data must exist before app starts
+# So they manually loaded it trhough script
+#in real time how do they know preolaod reqeuired or not
+# 👉 In real projects, they don’t “guess”
+# They know by looking at requirements + application behavior + documentation
+# Check project artifacts (what you did 👍)
+# Engineers check repo:
+# .sql / .js -->	preload required
+# No DB scripts -->	runtime data
+#user and cart application code lo .sql or .js script levu so no data preload is required for these two services
+#and user account creation times aa details runtime lo mongodb and redis ki vellipothai(connection 

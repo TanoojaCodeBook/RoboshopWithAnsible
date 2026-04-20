@@ -18,7 +18,7 @@
       enabled: yes 
    - name: wait for rabbitmq to start
      ansible.builtin.pause:
-     seconds: 10
+      seconds: 10
    - name: creating user and assigning permission
      community.rabbitmq.rabbitmq_user:
         user: roboshop
@@ -28,4 +28,4 @@
         read_priv: ".*"
         write_priv: ".*"
         state: present
-    
+      

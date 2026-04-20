@@ -152,3 +152,18 @@ Execute script on that remote DB
 # No DB scripts -->	runtime data
 #user and cart application code lo .sql or .js script levu so no data preload is required for these two services
 #and user account creation times aa details runtime lo mongodb and redis ki vellipothai(connection 
+
+| Service   | Tech   | Process |
+| --------- | ------ | ------- |
+| catalogue | NodeJS | node    |
+| user      | NodeJS | node    |
+| shipping  | Java   | java    |
+| payment   | Python | uwsgi   |
+| cart      | NodeJS | node    |
+
+uwsgi is a server used to run Python applications
+
+👉 In Roboshop:
+
+Payment service is written in Python
+It runs using uwsgi

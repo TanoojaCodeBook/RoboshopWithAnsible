@@ -91,3 +91,86 @@ mysql -u root -p
 If you are in another server and want to connect mysql remote server
 mysql -h 172.31.9.70 -u root (if no password)
 mysql -h <MYSQL_SERVER_IP> -u root -p (-p means prompt enterpassword)
+
+
+
+
+Rabbitmq
+👉 RabbitMQ is a message broker (or message queue system).
+
+👉 In simple words:
+
+It is used to send messages between services(cart, shipping, catalogue,payment,user) asynchronously
+
+Why do we need RabbitMQ?
+
+In microservices (like your Roboshop):
+
+👉 Services should not depend directly on each other
+
+Instead of this ❌:
+
+Order → directly calls Shipping
+
+We do this ✅:
+
+Order → RabbitMQ → Shipping
+
+| Component | Meaning          |
+| --------- | ---------------- |
+| Producer  | sends message    |
+| Queue     | stores message   |
+| Consumer  | receives message |
+Real example (Roboshop)
+🛒 When user places order:
+Order Service
+     ↓
+Send message → RabbitMQ
+     ↓
+Shipping Service reads message
+     ↓
+Processes shipping
+
+Why RabbitMQ is used
+✅ 1. Decoupling
+services don’t directly depend on each other
+✅ 2. Reliability
+if shipping is down → message stays in queue
+✅ 3. Async processing
+faster user response
+✅ 4. Scalability
+multiple consumers can process messages
+🧠 Without RabbitMQ
+Order → Shipping (direct call)
+
+❌ If shipping is down → order fails
+
+🧠 With RabbitMQ
+Order → Queue → Shipping
+
+✔ Shipping can process later
+
+Database:
+
+Stores data permanently
+
+👉 RabbitMQ:
+
+Stores messages TEMPORARILY
+(until consumed)
+
+What happens after consumption?
+Message → consumed by service
+        ↓
+Removed from queue
+
+You’ve now clearly separated:
+
+Redis (key-value)
+MongoDB (documents)
+MySQL (tables)
+RabbitMQ (messages) ✅
+
+
+
+

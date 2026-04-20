@@ -37,8 +37,8 @@
      
     - name: downloading application code 
       ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
-      dest: /tmp/payment.zip
+       url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
+       dest: /tmp/payment.zip
 
     - name: unzip the application code
       ansible.builtin.unarchive:
@@ -55,12 +55,12 @@
   
     - name: copy payment service
       ansible.builtin.template:
-      src: payment.service
-      dest: /etc/systemd/system/payment.service
+       src: payment.service
+       dest: /etc/systemd/system/payment.service
 
     - name: daemon reload
       ansible.builtin.systemd_service:
-      daemon_reload: true
+       daemon_reload: true
 
     - name: start enable payment
       ansible.builtin.service:

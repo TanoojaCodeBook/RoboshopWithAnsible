@@ -1,4 +1,4 @@
-- name: configuring payment service
+- name: configuring payment  service 
   hosts: payment
   become: yes
   tasks: 
@@ -52,7 +52,7 @@
        executable: pip3.9
       args:
        chdir: /app
-
+  
     - name: copy payment service
       ansible.builtin.template:
       src: payment.service

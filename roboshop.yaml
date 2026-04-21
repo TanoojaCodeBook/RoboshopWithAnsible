@@ -11,7 +11,7 @@
     domain_name: devops88s.fun
     state: create
 #before executing this install ansible and then aws configure(means logging into the existing aws account as a IAM user) and botocore and boto3(already task written for this)
-#ansible-playbook -i inventory.ini -e '{"instances": ["mongodb","catalogue","frontend","redis","user","cart","mysql","shipping","shipping","rabbitmq","payment"] }' roboshop.yaml
+#ansible-playbook -i inventory.ini -e '{"instances": ["mongodb","catalogue","frontend","redis","user","cart","mysql","shipping","rabbitmq","payment"] }' roboshop.yaml
 
 
   tasks:
